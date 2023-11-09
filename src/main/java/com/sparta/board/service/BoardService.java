@@ -3,6 +3,7 @@ package com.sparta.board.service;
 import com.sparta.board.dto.BoardRequestDto;
 import com.sparta.board.dto.BoardResponseDto;
 import com.sparta.board.entity.Board;
+import com.sparta.board.error.PasswordMismatchException;
 import com.sparta.board.repository.BoardRepository;
 import java.util.List;
 import java.util.Objects;
@@ -52,7 +53,7 @@ public class BoardService {
             board.update(requestDto);
             return new BoardResponseDto(board);
         } else {
-            throw new IllegalArgumentException("비밀번호가 일치하지 않습니다.");
+            throw new PasswordMismatchException("비밀번호가 일치하지 않습니다.");
         }
     }
 
@@ -68,7 +69,7 @@ public class BoardService {
             boardRepository.delete(board);
             return id;
         } else {
-            throw new IllegalArgumentException("비밀번호가 일치하지 않습니다.");
+            throw new PasswordMismatchException("비밀번호가 일치하지 않습니다.");
         }
     }
 

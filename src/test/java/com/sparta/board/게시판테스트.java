@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import com.sparta.board.dto.BoardRequestDto;
 import com.sparta.board.dto.BoardResponseDto;
 import com.sparta.board.entity.Board;
+import com.sparta.board.error.PasswordMismatchException;
 import com.sparta.board.repository.BoardRepository;
 import com.sparta.board.service.BoardService;
 import jakarta.persistence.EntityManager;
@@ -110,7 +111,7 @@ public class 게시판테스트 {
         requestDto.setContent("수정된 내용");
         requestDto.setPassword("틀린 비밀번호");
 
-        assertThrows(IllegalArgumentException.class, () -> {
+        assertThrows(PasswordMismatchException.class, () -> {
             boardService.updateBoard(id, requestDto);
         });
 
@@ -146,7 +147,7 @@ public class 게시판테스트 {
         Long id = boardResponseDto.getId();
 
         requestDto.setPassword("틀린 비밀번호");
-        assertThrows(IllegalArgumentException.class, () -> {
+        assertThrows(PasswordMismatchException.class, () -> {
             boardService.updateBoard(id, requestDto);
         });
     }
